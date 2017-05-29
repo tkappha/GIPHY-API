@@ -3,8 +3,10 @@ $(document).ready(function(){
 // ***** variables ********
 
 //array of animals
-var animals = ["horse", "dog", "elephant", "cat", "monkey", "mouse","turtle", "fish", "butterfly", "mongoose"];
+var topics = ["horse", "dog", "elephant", "cat", "monkey", "mouse","turtle", "fish", "butterfly", "mongoose"];
 
+var queryURL = "";
+var animal = "";
 
 // creates buttons based on array of animals
 function populateButtons(arrayToUse, classToAdd, areaToAddTo){
@@ -29,9 +31,10 @@ $(document).on("click", ".animal-button", function() {
 	$(this).addClass("active");
 
 	var animal = $(this).attr("data-type");
+	// console.log(animal);
 
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q" + animal + "&api_key=dc6zaTOxFJmzC&limit=10";
-
+	var queryURL = "http://api.giphy.com/v1/gifs/search?q="+animal+"&limit=5&api_key=dc6zaTOxFJmzC";
+	console.log(queryURL);
 
 $.ajax({
 	url: queryURL,
@@ -82,10 +85,10 @@ $(document).on("click",".animal-image", function(){
 		var newAnimal = $("input").eq(0).val();
 
 		if(newAnimal.length > 2) {
-			animals.push(newAnimal);
+			topics.push(newAnimal);
 		}
-		populateButtons(animals, "animal-button", "#animal-buttons");
+		populateButtons(topics, "animal-button", "#animal-buttons");
 	});
 
-	populateButtons(animals, "animal-button", "#animal-buttons");
+	populateButtons(topics, "animal-button", "#animal-buttons");
 });
